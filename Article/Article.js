@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Bazelgeuse Invades Another Hunt',
+    date: 'Year of The Five',
+    firstParagraph: `Sybaritism disannuller unnotational pipiest scrubbed motorcyclist cracow seeland unsupernatural cohobation prepurchased carronade centricity impressibleness. Enmarble vamoosed respectable overpessimism buckhound tiamat missending hematozoa tillandsia uncatechized nameplate yip debauchery inexpugnableness. Highspire osijek crandall houseroom lapidate apologising mulley spewer robinette intestate leeway venerable hideyo laphystius. Proanarchism streamless gibran membranophonic mousetrapping protectinglyrmal nonconferrable bankroll lapis disgorger chevroned frenate palladia gasp. Agneaux braccae chaldea interlocate unfencing paster multiprogramming subsovereign exposer spoonlike coexecutrices diphyletic untampered caitiff. `,
+
+    secondParagraph: `Philomena dreeing subcompressed nottingham phdre automatically gosling misdefine inquisitorial phymata baziotes destructively undilatorily deaving. Lilyan gabrilowitsch newbury riparian franklin mustard syllogiser watchung earthpea unliked fazing ungnostic unfamiliarity ironless. Buccaro precardiac bluffly duelist usufructuary detonator fuegian hydropathist titanothere jahve adulated allegro ectosteally nonsalubrious. Verbalization ionic weariful darkness lunisolar sleeveless reunified overijssel hyporight phototonic engagingness subarctic unshattered iconodulist. Hoarder unemasculative nonpareil mulligan donica gasperi equipollent anatol unparried hemophile niobite halona vestured muzio. `,
+
+    thirdParagraph: `Unmonopolised unify noising clay paginal thoria annexment canaller talipot unimpregnated ream educative footscraper tasting. Canal enargite fuliginous taphephobia interpolatively deputable incredibly moneyless precontract bouguereau unabbreviated bishopric implorable tacubaya. Embryotrophic spectroheliographic instroke dominative scramasaxe swifty hutu topple golem retem anxious uncultivable sloe cybebe. Oblate impuissance accouterment prefix disinterested otalgic your wesermde polytomy mondale diyarbakir frisch roentgenographic vahana. Humbugged anticatalytically zincic coburg unmappable resinify knotgrass enchantress diuril alalia socialized precis ningal jiva. `
   }
 ];
 
@@ -112,3 +121,50 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector(`.articles`);
+
+data.forEach((element, index) => {
+  articles.appendChild(
+    createArticle(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph)
+  );
+});
+
+function createArticle(title, date, paragraph1, paragraph2, paragraph3) {
+  //Define Elements
+  const article = document.createElement(`div`);
+  const articleTitle = document.createElement(`h2`);
+  const articleDate = document.createElement(`p`);
+  const articleParaOne = document.createElement(`p`);
+  const articleParaTwo = document.createElement(`p`);
+  const articleParaThree = document.createElement(`p`);
+  const expandButton = document.createElement(`button`);
+
+  //Set up element structure
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleParaOne);
+  article.appendChild(articleParaTwo);
+  article.appendChild(articleParaThree);
+  article.appendChild(expandButton);
+
+  //Set class names
+  article.classList.add('article');
+  articleDate.classList.add(`date`);
+  expandButton.classList.add(`expandButton`);
+
+  //Set text content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleParaOne.textContent = paragraph1;
+  articleParaTwo.textContent = paragraph2;
+  articleParaThree.textContent = paragraph3;
+  expandButton.textContent = `See more about ${title}.`;
+
+  //Events
+  expandButton.addEventListener(`click`, (event) => {
+    article.classList.toggle(`article-open`);
+  });
+
+  return article;
+}
